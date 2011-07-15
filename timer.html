@@ -18,7 +18,10 @@ function initialize() {
     // r
     if (e.keyCode == 82) {
       clearTimeout(timer_);
-      $("timer").innerHTML = MAX_SECONDS;
+      $("timer").innerText = MAX_SECONDS;
+      $("timer").style.opacity = 1;
+      $("yami").style.backgroundColor = '';
+      $("yami").style.opacity = 1;
       $("freezer").style.display = "none";
     }
     else if (e.keyCode == 32) {
@@ -29,7 +32,7 @@ function initialize() {
         timer_ = setInterval(function() {
           var diff    = Date.now() - start_;
           var remain  = parseInt(((MAX_SECONDS * 1000 - diff) / 1000),10);
-          $("timer").innerHTML = remain;
+          $("timer").innerText = remain;
           $("yami").style.opacity = (MAX_SECONDS - remain) / MAX_SECONDS;
           if (remain < 20) {
             $("timer").style.opacity = (1 - (20 - remain) / 20);
@@ -49,12 +52,13 @@ function initialize() {
   }
 
   document.body.addEventListener("keydown" , count_down , true);
+  $("timer").innerText = MAX_SECONDS;
 }
 </script>
 </head>
 <body background="yamiwall.jpeg" bgcolor="black" style="margin:0;" onload="initialize()">
   <div id="yami" align="center" style="height:100%;width:100%;">
-    <span id="timer" style="color:white;font-size:300pt;">120</span>
+    <span id="timer" style="color:white;font-size:300pt;"></span>
     <img id="freezer" src="./ike2.jpg" style="display:none">
   </div>
 </body>
