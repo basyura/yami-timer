@@ -1,0 +1,57 @@
+<html>
+<head>
+<script>
+function initialize() {
+  var MAX_SECONDS = 120;
+  var start_  = null;
+  var timer_  = null;
+  /*
+   *
+   */
+  function $(id) {
+    return document.getElementById(id);
+  }
+  /*
+   *
+   */
+  function count_down(e) {
+    // r
+    if (e.keyCode == 82) {
+      clearTimeout(timer_);
+      $("timer").innerHTML = MAX_SECONDS;
+    }
+    else if (e.keyCode == 32) {
+      // space
+      if (!document.body.start) {
+        $("yami").style.backgroundColor = "black";
+        start_ = Date.now();
+        timer_ = setInterval(function() {
+          var diff    = Date.now() - start_;
+          var remain  = parseInt(((MAX_SECONDS * 1000 - diff) / 1000),10);
+          $("timer").innerHTML = remain;
+          $("yami").style.opacity = (MAX_SECONDS - remain) / MAX_SECONDS;
+          if (remain == 0) {
+            clearTimeout(timer_);
+            $("freezer").style.display = "";
+            return;
+          }
+        } , 100);
+      }
+      else {
+        clearTimeout(timer_);
+      }
+      document.body.start = !document.body.start;
+    }
+  }
+
+  document.body.addEventListener("keydown" , count_down , true);
+}
+</script>
+</head>
+<body background="yamiwall.jpeg" bgcolor="black" style="margin:0;" onload="initialize()">
+  <div id="yami" align="center" style="height:100%;width:100%;">
+    <span id="timer" style="color:white;font-size:300pt;">120</span>
+    <img id="freezer" src="./ike2.jpg" style="display:none">
+  </div>
+</body>
+</html>
