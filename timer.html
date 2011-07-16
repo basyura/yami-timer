@@ -42,7 +42,7 @@ function initialize() {
           var diff    = Date.now() - start_;
           var remain  = parseInt(((MAX_SECONDS * 1000 - diff) / 1000),10);
           $("timer").innerText = remain;
-          $("yami").style.opacity = (MAX_SECONDS - remain) / MAX_SECONDS;
+          $("yami").style.opacity = (MAX_SECONDS + 10 - remain) / MAX_SECONDS * 1;
           if (remain < 20) {
             $("timer").style.opacity = (1 - (20 - remain) / 20);
           }
